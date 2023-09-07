@@ -6,6 +6,7 @@
 package herenciaejercicio2;
 
 import Entity.HomeAppliance;
+import Entity.WashingMachine;
 
 /**
  *
@@ -41,6 +42,8 @@ precio. Esta es la lista de precios:
     public static void main(String[] args) {
         HomeAppliance hA;
         hA = HomeAppliance.createHomeAppliance();
+        System.out.println(hA);
+        hA = WashingMachine.createWashingMachine();
         System.out.println(hA);
     }
     

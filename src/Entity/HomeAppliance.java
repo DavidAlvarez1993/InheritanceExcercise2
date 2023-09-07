@@ -14,12 +14,15 @@ import java.util.Scanner;
  * @author David
  */
 public class HomeAppliance {
+//ATTRIBUTES    
     protected double price;
     private ColorEnum color;
     private EnergyEfficiencyEnum energyEfficiency;
     protected double weight;
     protected static final int BASE_PRICE = 1000;
 
+    
+//CONSTRUCTORS
     public HomeAppliance() {
     }
 
