@@ -23,9 +23,7 @@ public class WashingMachine extends HomeAppliance {
 
     public WashingMachine(int laundryLoad, ColorEnum color, EnergyEfficiencyEnum energyEfficiency, double weight) {
         super(color, energyEfficiency, weight);
-        this.laundryLoad = laundryLoad;
-        this.finalPrice();
-    }
+        this.laundryLoad = laundryLoad;    }
 
 //getters & setters
     public int getLaundryLoad() {
@@ -52,20 +50,28 @@ public class WashingMachine extends HomeAppliance {
             }
         }while(laundryLoad<=0);
         
-        WashingMachine washingMachine; 
         return new WashingMachine(laundryLoad, homeAppliance.getColor(), homeAppliance.getEnergyEfficiency(),homeAppliance.weight);   
     }
 
     @Override
-    protected void finalPrice() {
-        super.finalPrice(); //To change body of generated methods, choose Tools | Templates.
+    public void finalPrice() {
+        super.finalPrice();
+        double aux = 0;
+        System.out.println(price);
+        System.out.println(laundryLoad);
+        if(laundryLoad>30){
+            aux = 500;
+        }
+        //sumar lo de la apacidad de carga
+        price += aux;   
+        System.out.println(price);
     }
     
     
 
     @Override
     public String toString() {
-        return "WashingMachine{" + "price=" + price + ", weight=" + weight + '}' + "laundryLoad=" + laundryLoad + '}';
+        return "WashingMachine{" + "price=" + price + ", weight=" + weight + "laundryLoad=" + laundryLoad + '}';
     }
 
     

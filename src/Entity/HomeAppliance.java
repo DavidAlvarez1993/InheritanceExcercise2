@@ -15,12 +15,12 @@ import java.util.Scanner;
  */
 public class HomeAppliance {
 //ATTRIBUTES    
-    protected double price;
+    
     private ColorEnum color;
     private EnergyEfficiencyEnum energyEfficiency;
     protected double weight;
     protected static final int BASE_PRICE = 1000;
-
+    protected static double price = BASE_PRICE;;
     
 //CONSTRUCTORS
     public HomeAppliance() {
@@ -30,7 +30,6 @@ public class HomeAppliance {
         this.color = color;
         this.energyEfficiency = energyEfficiency;
         this.weight = weight;
-        this.finalPrice();
     }
 //GETTERS & SETTERS
     public double getPrice() {
@@ -93,7 +92,7 @@ public class HomeAppliance {
         return color1;
     }
     
-    protected void finalPrice(){
+    public void finalPrice(){
         int priceOffset;
         
         if (weight < 20)
