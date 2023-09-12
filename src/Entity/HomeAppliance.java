@@ -15,13 +15,14 @@ import java.util.Scanner;
  */
 public class HomeAppliance {
 //ATTRIBUTES    
-    
+
     private ColorEnum color;
     private EnergyEfficiencyEnum energyEfficiency;
     protected double weight;
     protected static final int BASE_PRICE = 1000;
-    protected static double price = BASE_PRICE;;
-    
+    protected double price = BASE_PRICE;
+    protected boolean hasCalculated = false;
+
 //CONSTRUCTORS
     public HomeAppliance() {
     }
@@ -32,12 +33,9 @@ public class HomeAppliance {
         this.weight = weight;
     }
 //GETTERS & SETTERS
+
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public ColorEnum getColor() {
@@ -55,7 +53,7 @@ public class HomeAppliance {
     public void setEnergyEfficiency(EnergyEfficiencyEnum energyEfficiency) {
         this.energyEfficiency = energyEfficiency;
     }
-    
+
     public double getWeight() {
         return weight;
     }
@@ -67,9 +65,9 @@ public class HomeAppliance {
     public static int getBASE_PRICE() {
         return BASE_PRICE;
     }
-    
+
 //Other METHODS
-    private static EnergyEfficiencyEnum checkEnergyEfficiency(String letter){
+    private static EnergyEfficiencyEnum checkEnergyEfficiency(String letter) {
         EnergyEfficiencyEnum energyEffcy;
         try {
             energyEffcy = EnergyEfficiencyEnum.valueOf(letter.toUpperCase());
@@ -79,8 +77,8 @@ public class HomeAppliance {
         }
         return energyEffcy;
     }
-    
-    private static ColorEnum checkColor(String colorInput){
+
+    private static ColorEnum checkColor(String colorInput) {
         ColorEnum color1;
         try {
             color1 = ColorEnum.valueOf(colorInput.toUpperCase());
@@ -88,54 +86,62 @@ public class HomeAppliance {
             color1 = ColorEnum.WHITE;
             System.err.println("Wrong color. Settled by default as " + color1);
         }
-        
+
         return color1;
     }
-    
-    public void finalPrice(){
+
+    protected void finalPriceCalc() {
         int priceOffset;
-        
-        if (weight < 20)
+
+        if (weight < 20) {
             priceOffset = 100;
-        else if (weight < 50)
+        } else if (weight < 50) {
             priceOffset = 500;
-        else if (weight < 80)
+        } else if (weight < 80) {
             priceOffset = 800;
-        else
+        } else {
             priceOffset = 1000;
-        
+        }
+
         price = BASE_PRICE + this.energyEfficiency.getPriceOffset() + priceOffset;
     }
-    
-    public static HomeAppliance createHomeAppliance(){
+
+    public void finalPrice() {
+        if (!hasCalculated) {
+            
+            finalPriceCalc();
+
+            hasCalculated = true;
+        }
+
+    }
+
+    public static HomeAppliance createHomeAppliance() {
         Scanner input = new Scanner(System.in).useDelimiter("\n");
-        
+
         System.out.println("Enter the energy efficiency category (A-F): ");
         EnergyEfficiencyEnum energyEffcy;
         energyEffcy = checkEnergyEfficiency(input.next());
-        
+
         System.out.println("Enter the color of the home appliance(white, black, blue, red, grey):");
         ColorEnum color;
         color = checkColor(input.next());
-        
+
         System.out.println("Enter weight (Kg): ");
         double weight;
-        do{
+        do {
             weight = input.nextDouble();
-            if(weight<=0){
+            if (weight <= 0) {
                 System.err.println("Weight may have a positive value, enter the weight again: ");
             }
-        }while(weight <= 0);   
-        
-        
+        } while (weight <= 0);
+
         return new HomeAppliance(color, energyEffcy, weight);
     }
-    
 
     @Override
     public String toString() {
         return "HomeAppliance{" + "price=" + price + ", color=" + color + ", energyEfficiency=" + energyEfficiency + ", weight=" + weight + '}';
     }
 
-    
 }
